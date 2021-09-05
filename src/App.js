@@ -1,5 +1,5 @@
 import './App.css'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -8,11 +8,18 @@ import TableContainer from '@material-ui/core/TableContainer'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
+import data from './data/data.json'
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+})
+
+const content = data.map( data => {
+  return (
+    <h1>{data.symbol}</h1>
+  )
 })
 
 const createData = (name, calories, fat, carbs, protein) => {
@@ -37,23 +44,39 @@ const App = () => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Dessert (100g serving)</TableCell>
-              <TableCell align="right">Calories</TableCell>
-              <TableCell align="right">Fat&nbsp;(g)</TableCell>
-              <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-              <TableCell align="right">Protein&nbsp;(g)</TableCell>
+              <TableCell>Symbol</TableCell>
+              <TableCell align="right">Name</TableCell>
+              <TableCell align="right">Current Price ($)</TableCell>
+              <TableCell align="right">52-Week High</TableCell>
+              <TableCell align="right">52-Week Low</TableCell>
+              <TableCell align="right">5-Yr Avg Dividend</TableCell>
+              <TableCell align="right">Avg Daily Volume</TableCell>
+              <TableCell align="right">Quick Ratio</TableCell>
+              <TableCell align="right">Revenue Per Share</TableCell>
+              <TableCell align="right">Recommendation Key</TableCell>
+              <TableCell align="right">Forward PE</TableCell>
+              <TableCell align="right">Forward EPS</TableCell>
+              <TableCell align="right">Dividend Yield</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
+            {data.map((row) => (
+              <TableRow key={row.symbol}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.symbol}
                 </TableCell>
-                <TableCell align="right">{row.calories}</TableCell>
-                <TableCell align="right">{row.fat}</TableCell>
-                <TableCell align="right">{row.carbs}</TableCell>
-                <TableCell align="right">{row.protein}</TableCell>
+                <TableCell align="right">{row.shortName}</TableCell>
+                <TableCell align="right">{row.currentPrice}</TableCell>
+                <TableCell align="right">{row.fiftyTwoWeekHigh}</TableCell>
+                <TableCell align="right">{row.fiftyTwoWeekLow}</TableCell>
+                <TableCell align="right">{row.fiveYearAvgDividendYield}</TableCell>
+                <TableCell align="right">{row.averageDailyVolume10Day}</TableCell>
+                <TableCell align="right">{row.quickRatio}</TableCell>
+                <TableCell align="right">{row.revenuePerShare}</TableCell>
+                <TableCell align="right">{row.recommendationKey}</TableCell>
+                <TableCell align="right">{row.forwardPE}</TableCell>
+                <TableCell align="right">{row.forwardEps}</TableCell>
+                <TableCell align="right">{row.dividendYield}</TableCell>
               </TableRow>
             ))}
           </TableBody>
